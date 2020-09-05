@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Data
@@ -29,12 +30,16 @@ public class CommentEntity {
     private String content;
 
     @Column(name = "create_at")
-    private java.sql.Timestamp createAt;
+    private Timestamp createAt;
 
     @Column(name = "update_at")
-    private java.sql.Timestamp updateAt;
+    private Timestamp updateAt;
 
-    @ManyToOne() //EAGER
+    @OneToOne()
+    @JoinColumn(name = "userid", insertable = false, updatable = false)
+    private UserEntity user;
+
+    @ManyToOne()
     @JoinColumn(name = "filmid", insertable = false, updatable = false)
     private FilmEntity film;
 

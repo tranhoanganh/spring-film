@@ -3,11 +3,13 @@ package com.demo.entity;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Data
@@ -43,16 +45,18 @@ public class FilmEntity {
     @Column(name = "view")
     private Integer view;
 
+//    @JsonInclude(JsonInclude.Include.NON_NULL)
+//    @Transient
     @Column(name = "url")
     private String url;
 
     @Column(name = "create_at")
-    private java.sql.Timestamp createAt;
+    private Timestamp createAt;
 
     @Column(name = "update_at")
-    private java.sql.Timestamp updateAt;
+    private Timestamp updateAt;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "film_cast",
             joinColumns = @JoinColumn(name = "filmid"),
             inverseJoinColumns = @JoinColumn(name = "castid")
@@ -67,7 +71,6 @@ public class FilmEntity {
     @JoinColumn(name = "directorid", insertable = false, updatable = false)
     private DirectorEntity director;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "film")
+    @OneToMany(mappedBy = "film", fetch = FetchType.LAZY)
     private List<CommentEntity> comments;
 }

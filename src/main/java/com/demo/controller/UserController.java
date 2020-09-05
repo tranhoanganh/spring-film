@@ -1,7 +1,7 @@
 package com.demo.controller;
 
-import com.demo.dto.MapperDto;
-import com.demo.dto.UserDto;
+import com.demo.dto.base.MapperDto;
+import com.demo.dto.entitydto.UserDto;
 import com.demo.entity.UserEntity;
 import com.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,12 +28,13 @@ public class UserController {
     @PostMapping("/api/register")
     public ResponseEntity register(@Valid @RequestBody UserEntity userEntity) {
         UserEntity user = userService.saveUser(userEntity);
-        return ResponseEntity.ok(user);
+        UserDto userDto = mapperDto.convertToDto(user);
+        return ResponseEntity.ok(userDto);
     }
 
     @GetMapping("/api/user")
     public ResponseEntity getAllUser() {
-        List<UserEntity> list = userService.getAll();
+        List<UserDto> list = userService.getAll();
         return ResponseEntity.ok(list);
     }
 
@@ -52,13 +53,13 @@ public class UserController {
     }
 
     @PostMapping("/api/login")
-    public ResponseEntity login(@Valid @RequestBody UserDto userDto) {
-        UserEntity userEntity = userService.login(userDto.getUsername(), userDto.getPassword());
-        UserDto user = mapperDto.convertToDto(userEntity);
+    public ResponseEntity login(@Valid @RequestBody UserEntity userEntity) {
+        UserEntity user = userService.login(userEntity.getUsername(), userEntity.getPassword());
+        UserDto userDto = mapperDto.convertToDto(user);
         if (user == null) {
             return ResponseEntity.ok("Username or password invalid");
         }
-        return ResponseEntity.ok(user);
+        return ResponseEntity.ok(userDto);
     }
 
 }

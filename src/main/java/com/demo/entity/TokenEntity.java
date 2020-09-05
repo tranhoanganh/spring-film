@@ -28,7 +28,7 @@ public class TokenEntity {
     @Column(name = "expire")
     private Integer expire;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
     @JoinColumn(name = "userid", insertable = false, updatable = false)
     private UserEntity user;
 

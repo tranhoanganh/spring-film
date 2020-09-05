@@ -46,9 +46,12 @@ public class AuthenticationProvider extends AbstractUserDetailsAuthenticationPro
             throw new UsernameNotFoundException("Token invalid");
         }
         Set<GrantedAuthority> authorities = new HashSet<>();
-        for (RoleEntity role : userEntity.getRoles()) {
-            authorities.add(new SimpleGrantedAuthority(role.getName()));
+        if (userEntity.getRoles() != null && userEntity.getRoles().size() > 0) {
+            for (RoleEntity role : userEntity.getRoles()) {
+                authorities.add(new SimpleGrantedAuthority(role.getName()));
+            }
         }
+
         User user = new User(userEntity.getUsername(), userEntity.getPassword(), authorities);
         return user;
     }

@@ -1,5 +1,6 @@
-package com.demo.dto;
+package com.demo.dto.entitydto;
 
+import com.demo.dto.base.BaseDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

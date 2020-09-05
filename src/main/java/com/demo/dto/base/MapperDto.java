@@ -1,9 +1,7 @@
-package com.demo.dto;
+package com.demo.dto.base;
 
-import com.demo.entity.FilmEntity;
-import com.demo.entity.RoleEntity;
-import com.demo.entity.TokenEntity;
-import com.demo.entity.UserEntity;
+import com.demo.dto.entitydto.*;
+import com.demo.entity.*;
 import org.mapstruct.*;
 
 @Mapper(componentModel="spring", nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
@@ -27,5 +25,17 @@ public interface MapperDto {
 
     FilmDto convertToDto(FilmEntity entity);
     FilmEntity convertToEntity(FilmDto dto);
+
+    CastDto convertToDto(CastEntity entity);
+    CastEntity convertToEntity(CastDto dto);
+
+    DirectorDto convertToDto(DirectorEntity entity);
+    DirectorEntity convertToEntity(DirectorDto dto);
+
+    CategoryDto convertToDto(CategoryEntity entity);
+    CategoryEntity convertToEntity(CategoryDto dto);
+
+    CommentDto convertToDto(CommentEntity entity);
+    CommentEntity convertToEntity(CommentDto dto);
 
 }

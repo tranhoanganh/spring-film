@@ -31,8 +31,7 @@ public class DirectorEntity {
     @Column(name = "description")
     private String description;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "director")
+    @OneToMany(mappedBy = "director", fetch = FetchType.LAZY)
     private List<FilmEntity> films;
 
 }

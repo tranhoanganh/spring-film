@@ -28,7 +28,6 @@ public class CategoryEntity {
     @Column(name = "image")
     private String image;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "category")
     private List<FilmEntity> films;
 

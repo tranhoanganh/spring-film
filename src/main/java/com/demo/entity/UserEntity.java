@@ -37,10 +37,13 @@ public class UserEntity implements Serializable {
     private String token;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "user")
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
+    private CommentEntity comment;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private Set<TokenEntity> tokens;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "userid"),
             inverseJoinColumns = @JoinColumn(name = "roleid")

@@ -31,8 +31,7 @@ public class CastEntity {
     @Column(name = "description")
     private String description;
 
-    @JsonIgnore
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "casts")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "casts")
     private List<FilmEntity> films;
 
 }

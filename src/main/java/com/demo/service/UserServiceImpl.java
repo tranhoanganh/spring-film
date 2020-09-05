@@ -1,6 +1,7 @@
 package com.demo.service;
 
-import com.demo.dto.MapperDto;
+import com.demo.dto.base.MapperDto;
+import com.demo.dto.entitydto.UserDto;
 import com.demo.entity.TokenEntity;
 import com.demo.entity.UserEntity;
 import com.demo.repository.UserRepo;
@@ -9,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -53,12 +55,12 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public List<UserEntity> getAll() {
+    public List<UserDto> getAll() {
         List<UserEntity> list = userRepo.findAll();
-//        List<UserDto> listDto = list.stream()
-//                .map(x -> mapperDto.convertToDto(x))
-//                .collect(Collectors.toList());
-        return list;
+        List<UserDto> listDto = list.stream()
+                .map(x -> mapperDto.convertToDto(x))
+                .collect(Collectors.toList());
+        return listDto;
     }
 
 

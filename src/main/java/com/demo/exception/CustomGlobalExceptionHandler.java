@@ -52,7 +52,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 
         //body.put("errors", errors); //Put all error
         if (errors.size() > 0) {
-            body.put("error", errors.get(0));
+            body.put("message", errors.get(0));
         }
 
         return new ResponseEntity<>(body, headers, status);
@@ -66,7 +66,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         body.put("timestamp", new Date());
         body.put("status", 0);
         body.put("code", status.value());
-        body.put("error", ex.getMessage());
+        body.put("message", ex.getMessage());
 
         return new ResponseEntity<>(body, headers, status);
     }

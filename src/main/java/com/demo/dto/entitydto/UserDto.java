@@ -1,5 +1,6 @@
-package com.demo.dto;
+package com.demo.dto.entitydto;
 
+import com.demo.dto.base.BaseDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,7 +9,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
@@ -20,9 +20,7 @@ public class UserDto extends BaseDto {
     @NotBlank(message = "Username is not blank!")
     private String username;
 
-    @NotBlank(message = "Password is not blank!")
-    @Size(min = 6, message = "Password must be greater than 6 characters")
-    @Column(name = "password")
+    @JsonIgnore
     private String password;
 
     private String token;

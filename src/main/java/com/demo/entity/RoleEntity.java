@@ -23,7 +23,6 @@ public class RoleEntity implements Serializable {
     private Integer id;
     private String name;
 
-    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "roles")
     private List<UserEntity> users;
 
