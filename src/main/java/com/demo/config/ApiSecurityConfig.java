@@ -48,6 +48,6 @@ public class ApiSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/token/**","/images/**","/videos/**","/api/public/**","/api/register/**","/api/login/**","/api/home/**");
+        web.ignoring().antMatchers("/","/ok","/token/**","/images/**","/videos/**","/api/public/**","/api/register/**","/api/login/**","/api/home/**");
     }
 }

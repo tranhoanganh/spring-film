@@ -63,5 +63,10 @@ public class UserServiceImpl implements UserService{
         return listDto;
     }
 
+    @Override
+    public List<UserEntity> getAllUserEntity() {
+        return userRepo.findAll();
+    }
+
 
 }

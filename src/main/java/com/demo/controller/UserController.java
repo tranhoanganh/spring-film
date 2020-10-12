@@ -22,7 +22,12 @@ public class UserController {
 
     @GetMapping("/")
     public String index() {
-        return "Hello";
+        return "hello";
+    }
+
+    @GetMapping("/ok")
+    public ResponseEntity ok() {
+        return ResponseEntity.ok("OK!!!!!!");
     }
 
     @PostMapping("/api/register")

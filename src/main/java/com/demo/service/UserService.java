@@ -11,4 +11,5 @@ public interface UserService {
     UserEntity findUserByUsername(String username);
     UserEntity saveUser(UserEntity userEntity);
     List<UserDto> getAll();
+    List<UserEntity> getAllUserEntity();
 }

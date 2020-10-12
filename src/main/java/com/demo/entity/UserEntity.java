@@ -43,7 +43,7 @@ public class UserEntity implements Serializable {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private Set<TokenEntity> tokens;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "userid"),
             inverseJoinColumns = @JoinColumn(name = "roleid")
