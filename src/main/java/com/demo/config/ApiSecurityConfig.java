@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
@@ -37,17 +38,21 @@ public class ApiSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)
-                .authorizeRequests()
-                .antMatchers("/api/home").hasAuthority("USER")
-                .anyRequest().authenticated()
-                .and()
                 .csrf().disable()
+                .antMatcher("/api/**") ////Toàn bộ request Matcher /api/** đều do class này xử lý
+                .authorizeRequests()
+                .antMatchers("/api/login", "/api/register").permitAll()
+                .antMatchers("/api/home").hasAuthority("USER")
+                .anyRequest().authenticated() //Toàn bộ request Matcher /api/** đều phải có token
+                .and()
+                .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling().authenticationEntryPoint(customAuthEntryPoint);
+
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/","/ok","/token/**","/images/**","/videos/**","/api/public/**","/api/register/**","/api/login/**","/api/home/**");
-    }
+//    @Override
+//    public void configure(WebSecurity web) throws Exception {
+//        web.ignoring().antMatchers("/","/ok","/token/**","/images/**","/videos/**","/api/public/**","/api/register/**","/api/login/**","/api/home/**");
+//    }
 }

@@ -1,7 +1,9 @@
 package com.demo.service;
 
 import com.demo.dto.base.MapperDto;
+import com.demo.dto.entitydto.RoleDto;
 import com.demo.dto.entitydto.UserDto;
+import com.demo.entity.RoleEntity;
 import com.demo.entity.TokenEntity;
 import com.demo.entity.UserEntity;
 import com.demo.repository.UserRepo;
@@ -66,6 +68,15 @@ public class UserServiceImpl implements UserService{
     @Override
     public List<UserEntity> getAllUserEntity() {
         return userRepo.findAll();
+    }
+
+    @Override
+    public List<RoleDto> findRoles(int id) {
+        List<RoleEntity> list = userRepo.findRoles(id);
+        List<RoleDto> listDto = list.stream()
+                .map(x -> mapperDto.convertToDto(x))
+                .collect(Collectors.toList());
+        return listDto;
     }
 
 

@@ -20,12 +20,7 @@ public class UserController {
     @Autowired
     MapperDto mapperDto;
 
-    @GetMapping("/")
-    public String index() {
-        return "hello";
-    }
-
-    @GetMapping("/ok")
+    @GetMapping("/api/demo")
     public ResponseEntity ok() {
         return ResponseEntity.ok("OK!!!!!!");
     }

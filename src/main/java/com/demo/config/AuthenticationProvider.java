@@ -1,5 +1,6 @@
 package com.demo.config;
 
+import com.demo.dto.entitydto.RoleDto;
 import com.demo.entity.RoleEntity;
 import com.demo.entity.UserEntity;
 import com.demo.service.TokenService;
@@ -17,6 +18,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Component
